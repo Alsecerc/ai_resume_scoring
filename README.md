@@ -25,7 +25,7 @@ A modern web application that provides instant AI-powered resume analysis and fe
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/yourusername/ai_resume_scoring.git
+   git clone https://github.com/Alsecerc/ai_resume_scoring.git
    cd ai_resume_scoring
    ```
 
