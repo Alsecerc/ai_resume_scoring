@@ -1,0 +1,5 @@
+google-genai==1.11.0
+flask==3.0.2
+PyPDF2==3.0.1
+dotenv==0.9.9
+markdown==3.8.2

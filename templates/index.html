@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Resume Scorer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+<body>
+    <div class="container">
+        <div class="hero">
+            <h1>AI Resume Scorer</h1>
+            <p class="subtitle">Get instant feedback and improve your resume with AI-powered analysis</p>
+        </div>
+        
+        <form method="POST" enctype="multipart/form-data" id="resumeForm">
+            <div class="option-section">
+                <div class="option-header">
+                    <div class="option-icon">✍️</div>
+                    <h3>Paste your resume text</h3>
+                </div>
+                <textarea name="resume_text" placeholder="Paste your resume content here..."></textarea>
+            </div>
+            <div class="option-section">
+                <div class="option-header">
+                    <div class="option-icon">📄</div>
+                    <h3>Upload your resume (PDF)</h3>
+                </div>
+                <div class="file-upload-zone" id="fileUploadZone">
+                    <div class="upload-icon">📁</div>
+                    <div class="upload-text">Drag and drop your PDF here or click to browse</div>
+                    <input type="file" name="resume_file" accept="application/pdf" id="fileInput">
+                    <div class="file-name" id="fileName"></div>
+                </div>
+            </div>
+
+            <div class="option-section">
+                <div class="option-header">
+                    <div class="option-icon">⚙️</div>
+                    <h3>Request Improvements</h3>
+                </div>
+                <label class="custom-checkbox">
+                    <input type="checkbox" name="improvements" value="true">
+                    <span class="checkmark"></span>
+                    Yes, suggest improvements to my resume
+                </label>
+            </div>
+            <br>
+            <button type="submit">Analyze Resume</button>
+        </form>
+
+        {% if error %}
+            <div class="error">
+                <strong>⚠️ Error</strong>
+                {{ error }}
+            </div>
+        {% endif %}
+
+        {% if feedback %}
+            <div class="feedback">
+                <h3>AI Feedback:</h3>
+                <div>{{ feedback|safe }}</div>
+                
+                {% if show_download %}
+                    <div class="download-section">
+                        <hr style="margin: 20px 0; border: 1px solid #e0e6ed;">
+                        <h4>📄 Your Resume is Ready!</h4>
+                        <p>Your resume has been rewritten! You can edit the content or download it directly.</p>
+                        <div class="button-group">
+                            <a href="/edit-resume" class="edit-btn">
+                                ✏️ Edit Content
+                            </a>
+                            <a href="/download-resume" class="download-btn">
+                                📁 Download PDF
+                            </a>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        {% endif %}
+    </div>
+
+    <script>
+        // Drag and drop functionality
+        const fileUploadZone = document.getElementById('fileUploadZone');
+        const fileInput = document.getElementById('fileInput');
+        const fileName = document.getElementById('fileName');
+        const form = document.getElementById('resumeForm');
+        const submitButton = form.querySelector('button[type="submit"]');
+
+        // File upload zone events
+        fileUploadZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            fileUploadZone.classList.add('dragover');
+        });
+
+        fileUploadZone.addEventListener('dragleave', (e) => {
+            e.preventDefault();
+            fileUploadZone.classList.remove('dragover');
+        });
+
+        fileUploadZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            fileUploadZone.classList.remove('dragover');
+            
+            const files = e.dataTransfer.files;
+            if (files.length > 0) {
+                const file = files[0];
+                if (file.type === 'application/pdf') {
+                    fileInput.files = files;
+                    showFileName(file.name);
+                } else {
+                    alert('Please upload a PDF file only.');
+                }
+            }
+        });
+
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files.length > 0) {
+                showFileName(e.target.files[0].name);
+            } else {
+                hideFileName();
+            }
+        });
+
+        function showFileName(name) {
+            fileName.textContent = `📄 ${name}`;
+            fileName.style.display = 'block';
+        }
+
+        function hideFileName() {
+            fileName.style.display = 'none';
+        }
+
+        // Form submission with loading state
+        form.addEventListener('submit', (e) => {
+            const resumeText = form.querySelector('textarea[name="resume_text"]').value.trim();
+            const resumeFile = form.querySelector('input[name="resume_file"]').files[0];
+            
+            if (!resumeText && !resumeFile) {
+                e.preventDefault();
+                alert('Please either paste your resume text or upload a PDF file.');
+                return;
+            }
+
+            // Show loading state immediately
+            console.log('Showing loading state'); // Debug log
+            submitButton.classList.add('button-loading');
+            submitButton.disabled = true;
+            submitButton.innerHTML = 'Analyzing...';
+
+            // Safety timeout - only as backup
+            setTimeout(() => {
+                if (submitButton.classList.contains('button-loading')) {
+                    submitButton.classList.remove('button-loading');
+                    submitButton.disabled = false;
+                    submitButton.innerHTML = 'Analyze Resume';
+                    alert('Request timed out. Please try again.');
+                }
+            }, 180000); // 3 minutes
+        });
+
+        // Add smooth scrolling to feedback section if it exists
+        document.addEventListener('DOMContentLoaded', function() {
+            const feedbackSection = document.querySelector('.feedback');
+            if (feedbackSection) {
+                feedbackSection.scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'start' 
+                });
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,496 @@
+/* Global Reset & Fonts */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    color: #333;
+}
+
+.container {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 40px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.hero {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+h1 {
+    margin: 0 0 10px 0;
+    font-size: 2.5rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.subtitle {
+    font-size: 1.1rem;
+    color: #666;
+    margin: 0;
+    font-weight: 300;
+}
+
+.option-section {
+    margin: 30px 0;
+    padding: 25px;
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(103, 126, 234, 0.1);
+    transition: all 0.3s ease;
+}
+
+.option-section:hover {
+    background: rgba(255, 255, 255, 0.9);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.option-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.option-icon {
+    font-size: 1.5rem;
+    margin-right: 12px;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+}
+
+h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: #2c3e50;
+    font-weight: 600;
+}
+
+textarea {
+    width: 100%;
+    height: 180px;
+    padding: 12px;
+    font-size: 0.95rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    resize: vertical;
+    transition: border 0.2s;
+}
+
+textarea:focus {
+    border-color: #3498db;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(52,152,219,0.2);
+}
+
+.file-upload-zone {
+    border: 2px dashed #ccc;
+    border-radius: 12px;
+    padding: 30px;
+    text-align: center;
+    margin: 15px 0;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    background: rgba(103, 126, 234, 0.05);
+}
+
+.file-upload-zone:hover {
+    border-color: #667eea;
+    background: rgba(103, 126, 234, 0.1);
+    transform: translateY(-2px);
+}
+
+.file-upload-zone.dragover {
+    border-color: #667eea;
+    background: rgba(103, 126, 234, 0.15);
+    transform: scale(1.02);
+}
+
+.file-upload-zone input[type="file"] {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.upload-icon {
+    font-size: 2rem;
+    color: #667eea;
+    margin-bottom: 10px;
+}
+
+.upload-text {
+    color: #666;
+    margin: 5px 0;
+}
+
+.file-name {
+    margin-top: 10px;
+    padding: 8px 16px;
+    background: rgba(103, 126, 234, 0.1);
+    border-radius: 6px;
+    color: #667eea;
+    font-weight: 500;
+    display: none;
+}
+
+button {
+    display: inline-block;
+    padding: 15px 35px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.button-loading {
+    position: relative;
+    color: transparent;
+}
+
+.button-loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    border: 2px solid transparent;
+    border-top: 2px solid white;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    transform: translate(-50%, -50%);
+}
+
+@keyframes spin {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+.feedback {
+    margin-top: 30px;
+    padding: 20px;
+    border-radius: 10px;
+    background: #f9fbfd;
+    border: 1px solid #e0e6ed;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.feedback h3 {
+    margin-top: 0;
+    font-size: 1.3rem;
+    color: #2c3e50;
+}
+
+.feedback ul {
+    margin-left: 20px;
+    line-height: 1.6;
+}
+
+.feedback li {
+    margin-bottom: 8px;
+}
+
+.custom-checkbox {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 1rem;
+    color: #2c3e50;
+    margin-top: 10px;
+}
+
+.custom-checkbox input[type="checkbox"] {
+    display: none;
+}
+
+.checkmark {
+    width: 24px;
+    height: 24px;
+    border: 2px solid #ddd;
+    border-radius: 6px;
+    margin-right: 12px;
+    position: relative;
+    transition: all 0.3s ease;
+    background: white;
+}
+
+.custom-checkbox:hover .checkmark {
+    border-color: #667eea;
+    background: rgba(103, 126, 234, 0.05);
+}
+
+.custom-checkbox input[type="checkbox"]:checked + .checkmark {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    border-color: #667eea;
+}
+
+.custom-checkbox input[type="checkbox"]:checked + .checkmark::after {
+    content: '✓';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.error {
+    background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+    color: white;
+    padding: 15px 20px;
+    border-radius: 12px;
+    margin-top: 20px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+    border: none;
+}
+
+.error strong {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 1.1rem;
+}
+
+/* Download Section Styles */
+.download-section {
+    margin-top: 20px;
+    padding: 20px;
+    background: rgba(103, 126, 234, 0.05);
+    border-radius: 12px;
+    border: 1px solid rgba(103, 126, 234, 0.2);
+}
+
+.download-section h4 {
+    margin: 0 0 10px 0;
+    color: #2c3e50;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.download-section p {
+    margin: 0 0 15px 0;
+    color: #666;
+    line-height: 1.5;
+}
+
+.download-btn {
+    display: inline-block;
+    padding: 12px 30px;
+    background: linear-gradient(135deg, #27ae60, #2ecc71);
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
+}
+
+.download-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(39, 174, 96, 0.4);
+    text-decoration: none;
+    color: white;
+}
+
+.download-btn:active {
+    transform: translateY(0);
+}
+
+.button-group {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.edit-btn {
+    display: inline-block;
+    padding: 12px 30px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.edit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+    text-decoration: none;
+    color: white;
+}
+
+.edit-btn:active {
+    transform: translateY(0);
+}
+
+@media (max-width: 600px) {
+    .button-group {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .edit-btn, .download-btn {
+        width: 200px;
+        text-align: center;
+    }
+}
+
+/* Template Selection Styles */
+.template-selection {
+    margin-top: 15px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    border: 1px solid rgba(103, 126, 234, 0.2);
+}
+
+.template-selection h4 {
+    margin: 0 0 15px 0;
+    color: #2c3e50;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.template-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+}
+
+.template-option {
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.template-option input[type="radio"] {
+    display: none;
+}
+
+.template-card {
+    padding: 15px;
+    border: 2px solid #e0e6ed;
+    border-radius: 8px;
+    background: white;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.template-card strong {
+    display: block;
+    color: #2c3e50;
+    font-size: 1rem;
+    margin-bottom: 5px;
+}
+
+.template-card p {
+    margin: 0;
+    color: #666;
+    font-size: 0.9rem;
+    line-height: 1.3;
+}
+
+.template-option:hover .template-card {
+    border-color: #667eea;
+    background: rgba(103, 126, 234, 0.05);
+    transform: translateY(-1px);
+}
+
+.template-option input[type="radio"]:checked + .template-card {
+    border-color: #667eea;
+    background: linear-gradient(135deg, rgba(103, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+    box-shadow: 0 2px 8px rgba(103, 126, 234, 0.2);
+}
+
+.template-option input[type="radio"]:checked + .template-card strong {
+    color: #667eea;
+}
+
+.template-preserve {
+    border-color: #27ae60 !important;
+    background: rgba(39, 174, 96, 0.05) !important;
+}
+
+.template-preserve strong {
+    color: #27ae60 !important;
+}
+
+.template-option input[type="radio"]:checked + .template-preserve {
+    background: linear-gradient(135deg, rgba(39, 174, 96, 0.1), rgba(46, 204, 113, 0.1)) !important;
+    box-shadow: 0 2px 8px rgba(39, 174, 96, 0.2) !important;
+}
+
+/* Centered layout for smaller screens */
+@media (max-width: 600px) {
+    .container {
+        margin: 20px;
+        padding: 20px;
+    }
+    h1 {
+        font-size: 2rem;
+    }
+    textarea {
+        height: 140px;
+    }
+    .option-section {
+        padding: 20px;
+    }
+    .option-icon {
+        width: 30px;
+        height: 30px;
+        font-size: 1.2rem;
+    }
+}
